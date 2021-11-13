@@ -1,3 +1,5 @@
+package gym;
+
 import javax.swing.*;
 
 public class RegisterPage extends JFrame {
