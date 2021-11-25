@@ -1,0 +1,22 @@
+.root{
+    -fx-font-family: 'serif';
+    -fx-font-size: 30px;
+    -fx-background-image: url("bg2.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+
+.label{
+    -fx-text-fill: white;
+}
+
+.text-field{
+    -fx-border-colour: red;
+    -fx-border-width: 3px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+}
+
+.button {
+    -fx-background-radius: 15px;
+}
