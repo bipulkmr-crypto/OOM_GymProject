@@ -43,7 +43,7 @@ public class AdminLogin {
         stage2 = new Stage();
         GridPane root2 = new GridPane();
         scene2 = new Scene(root2, 600, 800);
-        scene2.getStylesheets().add("style.css");
+        scene2.getStylesheets().add("style.csStages");
 
         Member user = userData.getRecord(username, password);
 
