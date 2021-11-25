@@ -32,7 +32,7 @@ public class HomeScreen extends GridPane {
     private ImageView img4;
 
 
-    public  HomeScreen(Application app) {
+    public  HomeScreen(App app) {
         super();
 
         heading = new Label("FitSmash");
@@ -70,7 +70,7 @@ public class HomeScreen extends GridPane {
         adminLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //TODO: OPEN ADMIN LOGIN
+                app.setPage(new AdminLogin(app));
             }
         });
 

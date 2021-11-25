@@ -13,18 +13,9 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
-public class RegistrationPage {
+public class RegistrationPage extends GridPane{
 
-    private static Label heading;
-    private static Label nameLabel;
-    private static Label usernameLabel;
-    private static Label passwordLabel;
-    private static Label ageLabel;
-    private static Label regDateLabel;
-    private static Label emailLabel;
-    private static Label dueAmountLabel;
-    private static Label genderLabel;
-
+    private static App app;
     private static TextField nameField;
     private static TextField usernameField;
     private static PasswordField passwordField;
@@ -34,28 +25,28 @@ public class RegistrationPage {
     private static TextField dueAmountField;
     private static TextField genderField;
 
-    private static Button submitBtn;
-
 
     private static Database userData;
 
 
-    public static void RegistrationPageCreator(Stage primaryStage) {
+    public  RegistrationPage (App app) {
+        super();
+        this.app = app;
 
         userData = new Database();
 
-        heading = new Label("NEW REGISTRATION");
+        Label heading = new Label("NEW REGISTRATION");
 
-        submitBtn = new Button("SUBMIT");
+        Button submitBtn = new Button("SUBMIT");
 
-        nameLabel = new Label("NAME");
-        usernameLabel = new Label("USERNAME");
-        passwordLabel = new Label("PASSWORD");
-        ageLabel = new Label("AGE");
-        regDateLabel = new Label("REG. DATE");
-        emailLabel = new Label("EMAIL");
-        dueAmountLabel = new Label("DUE AMOUNT");
-        genderLabel = new Label("GENDER");
+        Label nameLabel = new Label("NAME");
+        Label usernameLabel = new Label("USERNAME");
+        Label passwordLabel = new Label("PASSWORD");
+        Label ageLabel = new Label("AGE");
+        Label regDateLabel = new Label("REG. DATE");
+        Label emailLabel = new Label("EMAIL");
+        Label dueAmountLabel = new Label("DUE AMOUNT");
+        Label genderLabel = new Label("GENDER");
 
         nameField = new TextField();
         usernameField = new TextField();
@@ -130,16 +121,12 @@ public class RegistrationPage {
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                String[] args;
-                HomeScreen.launch();
+                app.goBack();
             }
         });
         root.add(back,1,9);
         GridPane.setHalignment(submitBtn, HPos.CENTER);
 
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Registration Page");
-        primaryStage.show();
 
     }
 }
