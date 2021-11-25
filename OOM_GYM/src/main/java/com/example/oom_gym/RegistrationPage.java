@@ -120,6 +120,8 @@ public class RegistrationPage {
             public void handle(ActionEvent actionEvent) {
                 userData.insertRecord(usernameField.getText(), passwordField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
                         regDateField.getText(), genderField.getText(), emailField.getText(), Integer.parseInt(dueAmountField.getText()));
+                for(int i = 0; i < 8; i ++) fields[i].clear();
+                passwordField.clear();
             }
         });
 
@@ -132,6 +134,7 @@ public class RegistrationPage {
                 HomeScreen.launch();
             }
         });
+        root.add(back,1,9);
         GridPane.setHalignment(submitBtn, HPos.CENTER);
 
         primaryStage.setScene(scene);

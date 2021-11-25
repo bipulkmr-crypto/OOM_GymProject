@@ -101,15 +101,10 @@ public class UserLogin {
             root2.add(labels[i-1],0,i/2 + 1);
             root2.add(labels[i],1,i/2 + 1);
         }
-        Button back=new Button("Back");
-        back.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                String[] args;
-                HomeScreen.launch();
-            }
-        });
+
+
         root2.setPadding(new Insets(10,10,10,10));
+
 
         stage2.setScene(scene2);
         stage2.show();
@@ -188,15 +183,29 @@ public class UserLogin {
         root.add(okBtn,0,3);
         root.add(clearBtn,1,3);
 
+
         GridPane.setHalignment(usernameLabel, HPos.CENTER);
         GridPane.setHalignment(passwordLabel, HPos.CENTER);
         GridPane.setHalignment(okBtn, HPos.RIGHT);
         GridPane.setHalignment(clearBtn, HPos.LEFT);
 
+        Button back=new Button("Back");
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String[] args;
+                HomeScreen.launch();
+            }
+        });
+
+        RowConstraints row4 = new RowConstraints();
+        root.getRowConstraints().add(row4);
+        root.add(back,0,4);
+
         root.setHgap(10);
         root.setVgap(10);
 
-        primaryStage.setTitle("Login Page");
+        primaryStage.setTitle("User Login");
         primaryStage.setScene(scene);
         primaryStage.show();
 

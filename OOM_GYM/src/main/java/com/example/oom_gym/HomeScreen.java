@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -37,8 +38,9 @@ public class HomeScreen extends Application {
 
         userData = new Database();
 
-        heading = new Label("ELITE FITNESS CLUB");
+        heading = new Label("FitSmash");
         heading.setTextAlignment(TextAlignment.CENTER);
+        heading.setFont(new Font("Arial",63));
 
         img1 = new ImageView();
         Image i1 = new Image(getClass().getResourceAsStream("exercise.jpg"));
@@ -119,7 +121,7 @@ public class HomeScreen extends Application {
         root.add(adminLogin,1,2);
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("ELITE FITNESS CLUB");
+        primaryStage.setTitle("FITSMASH");
         primaryStage.show();
 
     }

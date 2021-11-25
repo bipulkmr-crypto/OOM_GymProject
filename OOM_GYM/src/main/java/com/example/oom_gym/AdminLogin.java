@@ -48,21 +48,30 @@ public class AdminLogin {
         Member user = userData.getRecord(username, password);
 
         Label USERNAMEL = new Label("USERNAME");
-        Label USERNAMER = new Label(user.username);
+        TextField USERNAMER = new TextField(user.username);
         Label PASSWORDL = new Label("PASSWORD");
-        Label PASSWORDR = new Label(user.password);
+        TextField PASSWORDR = new TextField(user.password);
         Label NAMEL = new Label("NAME");
-        Label NAMER = new Label(user.name);
+        TextField NAMER = new TextField(user.name);
         Label EMAILL = new Label("EMAIL");
-        Label EMAILR = new Label(user.email);
+        TextField EMAILR = new TextField(user.email);
         Label AGEL = new Label("AGE");
-        Label AGER = new Label(Integer.toString(user.age));
+        TextField AGER = new TextField(Integer.toString(user.age));
         Label GENDERL = new Label("Gender");
-        Label GENDERR = new Label(user.gender);
+        TextField GENDERR = new TextField(user.gender);
         Label DUEAMOUNTL = new Label("DUE AMOUNT");
-        Label DUEAMOUNTR = new Label(Integer.toString(user.dueAmount));
+        TextField DUEAMOUNTR = new TextField(Integer.toString(user.dueAmount));
         Label REGDATEL = new Label("REG. DATE");
-        Label REGDATER = new Label(user.regDate);
+        TextField REGDATER = new TextField(user.regDate);
+
+        Button submitBtn = new Button("SUBMIT");
+        submitBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                userData.insertRecord(USERNAMER.getText(),PASSWORDR.getText(),NAMER.getText(),Integer.parseInt(AGER.getText()),
+                        REGDATER.getText(),GENDERR.getText(),EMAILR.getText(),Integer.parseInt(DUEAMOUNTR.getText()));
+            }
+        });
 
         ColumnConstraints column1 = new ColumnConstraints();
         RowConstraints row1 = new RowConstraints();
@@ -85,17 +94,32 @@ public class AdminLogin {
         RowConstraints row7 = new RowConstraints();
         RowConstraints row8 = new RowConstraints();
         RowConstraints row9 = new RowConstraints();
+        RowConstraints row10 = new RowConstraints();
         column2.setPercentWidth(50);
-        row2.setPercentHeight(25);
-        row3.setPercentHeight(25);
-        row4.setPercentHeight(25);
-        row5.setPercentHeight(25);
-        row6.setPercentHeight(25);
-        row7.setPercentHeight(25);
-        row8.setPercentHeight(25);
-        row9.setPercentHeight(25);
-        root2.getColumnConstraints().addAll(column1, column2);
-        root2.getRowConstraints().addAll(row2, row3, row4, row5, row6, row7, row8, row9);
+        row2.setPercentHeight(9);
+        row3.setPercentHeight(9);
+        row4.setPercentHeight(9);
+        row5.setPercentHeight(9);
+        row6.setPercentHeight(9);
+        row7.setPercentHeight(9);
+        row8.setPercentHeight(9);
+        row9.setPercentHeight(9);
+        row10.setPercentHeight(9);
+        root2.getColumnConstraints().addAll(column1,column2);
+        root2.getRowConstraints().addAll(row2,row3,row4,row5,row6,row7,row8,row9,row10);
+
+        // ADD ROW 10 JUST AFTER ROW 9
+
+        Label[] labels = new Label[] {NAMEL,USERNAMEL,PASSWORDL,EMAILL,GENDERL,AGEL,REGDATEL, DUEAMOUNTL};
+        TextField[] fields = new TextField[] {NAMER,USERNAMER,PASSWORDR,EMAILR,GENDERR,AGER,REGDATER,DUEAMOUNTR};
+
+        for(int i = 1; i <= 8; i++){
+            root2.add(labels[i-1],0,i);
+            root2.add(fields[i-1],1,i);
+        }
+
+        root2.add(submitBtn,0,9);
+
         Button back=new Button("Back");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -104,14 +128,8 @@ public class AdminLogin {
                 HomeScreen.launch();
             }
         });
-//        root2.add(back,0,10);
-        Label[] labels = new Label[]{NAMEL, NAMER, USERNAMEL, USERNAMER, PASSWORDL, PASSWORDR, EMAILL, EMAILR,
-                GENDERL, GENDERR, AGEL, AGER, REGDATEL, REGDATER, DUEAMOUNTL, DUEAMOUNTR};
+        root2.add(back,1,9);
 
-        for (int i = 1; i <= 16; i += 2) {
-            root2.add(labels[i - 1], 0, i / 2 + 1);
-            root2.add(labels[i], 1, i / 2 + 1);
-        }
 
         root2.setPadding(new Insets(10, 10, 10, 10));
 

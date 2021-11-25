@@ -4,10 +4,12 @@
     -fx-background-image: url("bg2.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: stretch;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
 }
 
 .label{
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .text-field{

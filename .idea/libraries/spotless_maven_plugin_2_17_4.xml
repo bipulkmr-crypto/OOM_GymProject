@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="spotless-maven-plugin-2.17.4">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../spotless-maven-plugin-2.17.4.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
