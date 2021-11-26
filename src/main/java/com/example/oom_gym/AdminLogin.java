@@ -28,7 +28,6 @@ public class AdminLogin extends GridPane {
     private static PasswordField passwordField;
     private static PasswordField adminPasswordField;
 
-    private static Database userData;
 
 
     public void createStage2(String username, String password) {
@@ -58,7 +57,7 @@ public class AdminLogin extends GridPane {
         submitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                userData.insertRecord(USERNAMER.getText(),
+                app.database.insertRecord(USERNAMER.getText(),
                         PASSWORDR.getText(),
                         NAMER.getText(),
                         Integer.parseInt(AGER.getText()),

@@ -25,15 +25,9 @@ public class RegistrationPage extends GridPane{
     private static TextField dueAmountField;
     private static TextField genderField;
 
-
-    private static Database userData;
-
-
     public  RegistrationPage (App app) {
         super();
         this.app = app;
-
-        userData = new Database();
 
         Label heading = new Label("NEW REGISTRATION");
 
@@ -109,7 +103,7 @@ public class RegistrationPage extends GridPane{
         submitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                userData.insertRecord(usernameField.getText(), passwordField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
+                app.database.insertRecord(usernameField.getText(), passwordField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
                         regDateField.getText(), genderField.getText(), emailField.getText(), Integer.parseInt(dueAmountField.getText()));
                 for(int i = 0; i < 8; i ++) fields[i].clear();
                 passwordField.clear();

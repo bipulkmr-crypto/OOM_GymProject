@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 
 public class HomeScreen extends GridPane {
 
-    private Database userData;
     private Label heading;
     private Button exercisePlans;
     private Button userLogin;

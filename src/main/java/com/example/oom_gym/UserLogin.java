@@ -25,10 +25,74 @@ public class UserLogin extends GridPane{
     private static TextField usernameField;
     private static PasswordField passwordField;
 
-    private static Stage stage2;
     private static App app;
-    private static Scene scene2;
 
+    public void secondScreen(String username, String password){
+        getChildren().clear();
+        Member user = app.database.getRecord(username,password);
+
+        Label USERNAMEL = new Label("USERNAME");
+        Label USERNAMER = new Label(user.username);
+        Label PASSWORDL = new Label("PASSWORD");
+        Label PASSWORDR = new Label(user.password);
+        Label NAMEL = new Label("NAME");
+        Label NAMER = new Label(user.name);
+        Label EMAILL = new Label("EMAIL");
+        Label EMAILR = new Label(user.email);
+        Label AGEL = new Label("AGE");
+        Label AGER = new Label(Integer.toString(user.age));
+        Label GENDERL = new Label("Gender");
+        Label GENDERR = new Label(user.gender);
+        Label DUEAMOUNTL = new Label("DUE AMOUNT");
+        Label DUEAMOUNTR = new Label(Integer.toString(user.dueAmount));
+        Label REGDATEL = new Label("REG. DATE");
+        Label REGDATER = new Label(user.regDate);
+
+        ColumnConstraints column1 = new ColumnConstraints();
+        RowConstraints row1 = new RowConstraints();
+        column1.setPercentWidth(100);
+        row1.setPercentHeight(20);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        Label head = new Label("USER DETAILS");
+        add(head,0,0);
+        getColumnConstraints().remove(0);
+        GridPane.setHalignment(head, HPos.CENTER);
+
+        column1.setPercentWidth(50);
+        ColumnConstraints column2 = new ColumnConstraints();
+        RowConstraints row2 = new RowConstraints();
+        RowConstraints row3 = new RowConstraints();
+        RowConstraints row4 = new RowConstraints();
+        RowConstraints row5 = new RowConstraints();
+        RowConstraints row6 = new RowConstraints();
+        RowConstraints row7 = new RowConstraints();
+        RowConstraints row8 = new RowConstraints();
+        RowConstraints row9 = new RowConstraints();
+        column2.setPercentWidth(50);
+        row2.setPercentHeight(25);
+        row3.setPercentHeight(25);
+        row4.setPercentHeight(25);
+        row5.setPercentHeight(25);
+        row6.setPercentHeight(25);
+        row7.setPercentHeight(25);
+        row8.setPercentHeight(25);
+        row9.setPercentHeight(25);
+        getColumnConstraints().addAll(column1,column2);
+        getRowConstraints().addAll(row2,row3,row4,row5,row6,row7,row8,row9);
+
+        Label[] labels = new Label[] {NAMEL,NAMER,USERNAMEL,USERNAMER,PASSWORDL,PASSWORDR,EMAILL,EMAILR,
+                GENDERL,GENDERR,AGEL,AGER,REGDATEL,REGDATER, DUEAMOUNTL,DUEAMOUNTR};
+
+        for(int i = 1; i <= 16; i+=2){
+            add(labels[i-1],0,i/2 + 1);
+            add(labels[i],1,i/2 + 1);
+        }
+
+
+        setPadding(new Insets(10,10,10,10));
+
+    }
 
     public  UserLogin(App app) {
         this.app = app;
@@ -58,7 +122,7 @@ public class UserLogin extends GridPane{
         okBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                // TODO
+                secondScreen(usernameField.getText(),passwordField.getText());
             }
         });
 
