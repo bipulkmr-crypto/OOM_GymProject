@@ -20,51 +20,40 @@ import javafx.stage.Stage;
 
 public class HomeScreen extends GridPane {
 
-    private Label heading;
-    private Button exercisePlans;
-    private Button userLogin;
-    private Button adminLogin;
-    private Button registrationPage;
-    private ImageView img1;
-    private ImageView img2;
-    private ImageView img3;
-    private ImageView img4;
-
-
     public  HomeScreen(App app) {
         super();
 
-        heading = new Label("FitSmash");
+        Label heading = new Label("FitSmash");
         heading.setTextAlignment(TextAlignment.CENTER);
+        heading.setMinWidth(USE_PREF_SIZE);
+        heading.setTranslateX(130);
         heading.setFont(new Font("Arial", 63));
 
-        img1 = new ImageView();
+        ImageView img1 = new ImageView();
         Image i1 = new Image(getClass().getResourceAsStream("exercise.jpg"));
         img1.setImage(i1);
-        exercisePlans = new Button("Exercise Plans", img1);
+        Button exercisePlans = new Button("Exercise Plans", img1);
         exercisePlans.setContentDisplay(ContentDisplay.TOP);
         exercisePlans.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                // TODO: OPEN PLANS
-            }
+                app.setPage(new Plans(app));            }
         });
-        img2 = new ImageView();
+        ImageView img2 = new ImageView();
         Image i2 = new Image(getClass().getResourceAsStream("register.png"));
         img2.setImage(i2);
-        registrationPage = new Button("Register", img2);
+        Button registrationPage = new Button("Register", img2);
         registrationPage.setContentDisplay(ContentDisplay.TOP);
         registrationPage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //TODO: OPEN REGISTRATION PAGE
-            }
+                app.setPage(new RegistrationPage(app));            }
         });
 
-        img3 = new ImageView();
+        ImageView img3 = new ImageView();
         Image i3 = new Image(getClass().getResourceAsStream("adminL.jpg"));
         img3.setImage(i3);
-        adminLogin = new Button("Admin Login", img3);
+        Button adminLogin = new Button("Admin Login", img3);
         adminLogin.setContentDisplay(ContentDisplay.TOP);
         adminLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -73,16 +62,15 @@ public class HomeScreen extends GridPane {
             }
         });
 
-        img4 = new ImageView();
+        ImageView img4 = new ImageView();
         Image i4 = new Image(getClass().getResourceAsStream("userL.jpg"));
         img4.setImage(i4);
-        userLogin = new Button("User Login", img4);
+        Button userLogin = new Button("User Login", img4);
         userLogin.setContentDisplay(ContentDisplay.TOP);
         userLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //TODO: START USER LOGIN
-            }
+                app.setPage(new UserLogin(app));            }
         });
 
         setPadding(new Insets(10, 10, 10, 10));

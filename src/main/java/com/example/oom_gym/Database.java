@@ -7,7 +7,6 @@ import java.sql.*;
 
 public class Database {
 
-    private static Connection connection;
     public  Database(){
         try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gym")) {
             System.out.println("Connected to PostgreSQL database!");
@@ -23,7 +22,7 @@ public class Database {
 //        return data.get(P);
         Statement statement = null;
         Member res=null;
-        try {
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gym")){
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM members where username='%s' and password='%s';", username, password));
             if (resultSet.next()) {
@@ -35,7 +34,7 @@ public class Database {
                         resultSet.getString("gender"),
                         resultSet.getString("email"),
                         resultSet.getInt("age"),
-                        resultSet.getInt("dueAmount")
+                        resultSet.getInt("dueamount")
                         );
             }
         } catch (SQLException e) {
@@ -49,14 +48,15 @@ public class Database {
     public void insertRecord(String username, String password, String name,int age,String regDate,String gender,
                              String email,int dueAmount){
         Statement statement = null;
-        try {
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gym")){
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("INSERT INTO MEMBERS(username, password, name, regdate, gender, email, age, 'dueAmount') VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', %d, %d);", username, password, name, regDate, gender, email, age, dueAmount));
+
+            statement.execute(String.format("INSERT INTO MEMBERS(username, password, name, regdate, gender, email, age, dueamount) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', %d, %d);", username, password, name, regDate, gender, email, age, dueAmount));
 
         } catch (SQLException e) {
             System.out.println("Connection failure.");
             e.printStackTrace();
-        };
+        }
     }
 
 

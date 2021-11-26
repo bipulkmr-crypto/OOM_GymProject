@@ -52,19 +52,14 @@ public class RegistrationPage extends GridPane{
         genderField = new TextField();
 
 
-        GridPane root = new GridPane();
-        Scene scene = new Scene(root, 600, 800);
-        scene.getStylesheets().add("style.css");
-        root.setPadding(new Insets(10, 10, 10, 10));
-
         ColumnConstraints column1 = new ColumnConstraints();
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(20);
-        root.getColumnConstraints().add(column1);
-        root.getRowConstraints().add(row1);
-        root.add(heading, 0, 0);
-        root.getColumnConstraints().remove(0);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        add(heading, 0, 0);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(heading, HPos.CENTER);
 
         column1.setPercentWidth(50);
@@ -88,16 +83,16 @@ public class RegistrationPage extends GridPane{
         row8.setPercentHeight(9);
         row9.setPercentHeight(9);
         row10.setPercentHeight(8);
-        root.getColumnConstraints().addAll(column1, column2);
-        root.getRowConstraints().addAll(row2, row3, row4, row5, row6, row7, row8, row9);
+        getColumnConstraints().addAll(column1, column2);
+        getRowConstraints().addAll(row2, row3, row4, row5, row6, row7, row8, row9);
 
         Label[] labels = new Label[]{nameLabel, usernameLabel, passwordLabel, ageLabel, regDateLabel, emailLabel, dueAmountLabel, genderLabel};
         TextField[] fields = new TextField[]{nameField, usernameField, usernameField, ageField, regDateField, emailField, dueAmountField, genderField};
 
         for (int i = 1; i <= 8; i++) {
-            root.add(labels[i - 1], 0, i);
-            if (i == 3) root.add(passwordField, 1, i);
-            else root.add(fields[i - 1], 1, i);
+           add(labels[i - 1], 0, i);
+            if (i == 3) add(passwordField, 1, i);
+            else add(fields[i - 1], 1, i);
         }
 
         submitBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -110,7 +105,7 @@ public class RegistrationPage extends GridPane{
             }
         });
 
-        root.add(submitBtn, 0, 9);
+        add(submitBtn, 0, 9);
         Button back=new Button("Back");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -118,7 +113,7 @@ public class RegistrationPage extends GridPane{
                 app.goBack();
             }
         });
-        root.add(back,1,9);
+        add(back,1,9);
         GridPane.setHalignment(submitBtn, HPos.CENTER);
 
 

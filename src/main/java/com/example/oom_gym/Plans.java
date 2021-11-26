@@ -16,7 +16,7 @@ public class Plans extends GridPane{
 
     public static App app;
 
-    public void Plans(App app) {
+    public Plans(App app) {
         this.app = app;
         Label name = new Label("Name");
         Label Price = new Label("Price");
@@ -40,17 +40,20 @@ public class Plans extends GridPane{
         RowConstraints row2 = new RowConstraints();
         RowConstraints row3 = new RowConstraints();
         RowConstraints row4 = new RowConstraints();
+        RowConstraints row5 = new RowConstraints();
+
         row2.setPercentHeight(20);
         row3.setPercentHeight(20);
         row4.setPercentHeight(20);
-        getRowConstraints().addAll(row2, row3, row4);
+        row5.setPercentHeight(20);
+
+        getRowConstraints().addAll(row2, row3, row4, row5);
         add(plan1, 0, 1);
         add(price1, 1, 1);
         add(plan2, 0, 2);
         add(price2, 1, 2);
         add(plan3, 0, 3);
         add(price3, 1, 3);
-        setPadding(new Insets(10,10,10,10));
         Button back=new Button("Back");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -58,6 +61,11 @@ public class Plans extends GridPane{
                 app.goBack();
             }
         });
+
+        add(back,0,4);
+
+        setPadding(new Insets(10,10,10,10));
+
 
     }
 

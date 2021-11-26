@@ -135,8 +135,6 @@ public class AdminLogin extends GridPane {
     public AdminLogin(App app) {
         super();
         this.app = app;
-        app.database.insertRecord("IIT2020028", "vibhug507", "Vibhu Garg", 19,
-                "2021-11-23", "Male", "iit2020028@iiita.ac.in", 10000);
 
 
         setPadding(new Insets(10, 10, 10, 10));
@@ -207,7 +205,7 @@ public class AdminLogin extends GridPane {
         add(passwordField, 1, 2);
         add(adminPasswordLabel, 0, 3);
         add(adminPasswordField, 1, 3);
-        add(okBtn, 0, 4);
+        add(okBtn, 1, 4);
         add(clearBtn, 1, 4);
 
         GridPane.setHalignment(usernameLabel, HPos.CENTER);
@@ -215,6 +213,15 @@ public class AdminLogin extends GridPane {
         GridPane.setHalignment(adminPasswordLabel, HPos.CENTER);
         GridPane.setHalignment(okBtn, HPos.RIGHT);
         GridPane.setHalignment(clearBtn, HPos.LEFT);
+
+        Button back=new Button("Back");
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                app.goBack();
+            }
+        });
+        add(back,0,4);
 
         setHgap(10);
         setVgap(10);

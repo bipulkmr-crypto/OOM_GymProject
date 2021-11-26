@@ -96,14 +96,7 @@ public class UserLogin extends GridPane{
 
     public  UserLogin(App app) {
         this.app = app;
-        app.database.insertRecord("IIT2020028","vibhug507","Vibhu Garg",19,
-                "2021-11-23","Male","iit2020028@iiita.ac.in",10000);
 
-        GridPane root = new GridPane();
-        Scene scene = new Scene(root, 600, 800);
-        scene.getStylesheets().add("style.css");
-
-        root.setPadding(new Insets(10,10,10,10));
 
         ImageView img = new ImageView();
 
@@ -139,10 +132,10 @@ public class UserLogin extends GridPane{
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(40);
-        root.getColumnConstraints().add(column1);
-        root.getRowConstraints().add(row1);
-        root.add(img,0,0,2,1);
-        root.getColumnConstraints().remove(0);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        add(img,0,0,2,1);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(img, HPos.CENTER);
 
 
@@ -154,16 +147,16 @@ public class UserLogin extends GridPane{
         column2.setPercentWidth(50);
         row2.setPercentHeight(25);
         row3.setPercentHeight(25);
-        root.getColumnConstraints().addAll(column1,column2);
-        root.getRowConstraints().addAll(row2,row3);
+        getColumnConstraints().addAll(column1,column2);
+        getRowConstraints().addAll(row2,row3);
 
 
-        root.add(usernameLabel,0,1);
-        root.add(usernameField,1,1);
-        root.add(passwordLabel,0,2);
-        root.add(passwordField,1,2);
-        root.add(okBtn,0,3);
-        root.add(clearBtn,1,3);
+        add(usernameLabel,0,1);
+        add(usernameField,1,1);
+        add(passwordLabel,0,2);
+        add(passwordField,1,2);
+        add(okBtn,0,3);
+        add(clearBtn,1,3);
 
 
         GridPane.setHalignment(usernameLabel, HPos.CENTER);
@@ -179,12 +172,10 @@ public class UserLogin extends GridPane{
             }
         });
 
-        RowConstraints row4 = new RowConstraints();
-        root.getRowConstraints().add(row4);
-        root.add(back,0,4);
+        add(back,0,3);
 
-        root.setHgap(10);
-        root.setVgap(10);
+        setHgap(10);
+        setVgap(10);
     }
 
 
