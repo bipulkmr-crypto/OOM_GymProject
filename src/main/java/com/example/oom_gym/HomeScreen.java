@@ -18,91 +18,72 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 
-public class HomeScreen extends Application {
+public class HomeScreen extends GridPane {
 
-    private Database userData;
-    private Label heading;
-    private Button exercisePlans;
-    private Button userLogin;
-    private Button adminLogin;
-    private Button registrationPage;
-    private ImageView img1;
-    private ImageView img2;
-    private ImageView img3;
-    private ImageView img4;
+    public  HomeScreen(App app) {
+        super();
 
-
-
-    @Override
-    public void start(Stage primaryStage) {
-
-        userData = new Database();
-
-        heading = new Label("FitSmash");
+        Label heading = new Label("FitSmash");
         heading.setTextAlignment(TextAlignment.CENTER);
-        heading.setFont(new Font("Arial",63));
+        heading.setMinWidth(USE_PREF_SIZE);
+        heading.setTranslateX(130);
+        heading.setFont(new Font("Arial", 63));
 
-        img1 = new ImageView();
+        ImageView img1 = new ImageView();
         Image i1 = new Image(getClass().getResourceAsStream("exercise.jpg"));
         img1.setImage(i1);
-        exercisePlans = new Button("Exercise Plans",img1);
+        Button exercisePlans = new Button("Exercise Plans", img1);
         exercisePlans.setContentDisplay(ContentDisplay.TOP);
         exercisePlans.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-            Plans.displayPlans(primaryStage);
-            }
+                app.setPage(new Plans(app));            }
         });
-        img2 = new ImageView();
+        ImageView img2 = new ImageView();
         Image i2 = new Image(getClass().getResourceAsStream("register.png"));
         img2.setImage(i2);
-        registrationPage = new Button("Register",img2);
+        Button registrationPage = new Button("Register", img2);
         registrationPage.setContentDisplay(ContentDisplay.TOP);
         registrationPage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                RegistrationPage.RegistrationPageCreator(primaryStage);
-            }
+                app.setPage(new RegistrationPage(app));            }
         });
 
-        img3 = new ImageView();
+        ImageView img3 = new ImageView();
         Image i3 = new Image(getClass().getResourceAsStream("adminL.jpg"));
         img3.setImage(i3);
-        adminLogin = new Button("Admin Login",img3);
+        Button adminLogin = new Button("Admin Login", img3);
         adminLogin.setContentDisplay(ContentDisplay.TOP);
         adminLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                AdminLogin.createAdminLogin(primaryStage);
+                app.setPage(new AdminLogin(app));
             }
         });
 
-        img4 = new ImageView();
+        ImageView img4 = new ImageView();
         Image i4 = new Image(getClass().getResourceAsStream("userL.jpg"));
         img4.setImage(i4);
-        userLogin = new Button("User Login",img4);
+        Button userLogin = new Button("User Login", img4);
         userLogin.setContentDisplay(ContentDisplay.TOP);
         userLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                UserLogin.start(primaryStage);
-            }
+                app.setPage(new UserLogin(app));            }
         });
 
-        GridPane root = new GridPane();
-        Scene scene = new Scene(root, 560, 800);
-        scene.getStylesheets().add("style.css");
-        root.setPadding(new Insets(10,10,10,10));
+        setPadding(new Insets(10, 10, 10, 10));
 
         ColumnConstraints column1 = new ColumnConstraints();
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(20);
-        root.getColumnConstraints().add(column1);
-        root.getRowConstraints().add(row1);
-        root.add(heading,0,0);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        add(heading, 0, 0);
         GridPane.setHalignment(heading, HPos.CENTER);
-        root.getColumnConstraints().remove(0);
+        getColumnConstraints().remove(0);
 
         column1.setPercentWidth(50);
         ColumnConstraints column2 = new ColumnConstraints();
@@ -111,24 +92,17 @@ public class HomeScreen extends Application {
         column2.setPercentWidth(50);
         row2.setPercentHeight(40);
         row3.setPercentHeight(40);
-        root.getColumnConstraints().addAll(column1,column2);
-        root.getRowConstraints().addAll(row2,row3);
+        getColumnConstraints().addAll(column1, column2);
+        getRowConstraints().addAll(row2, row3);
 
 
-        root.add(exercisePlans,0,1);
-        root.add(registrationPage,1,1);
-        root.add(userLogin,0,2);
-        root.add(adminLogin,1,2);
+        add(exercisePlans, 0, 1);
+        add(registrationPage, 1, 1);
+        add(userLogin, 0, 2);
+        add(adminLogin, 1, 2);
 
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("FITSMASH");
-        primaryStage.show();
 
     }
 
-
-    public static void main(String[] args) {
-        launch();
-    }
 
 }

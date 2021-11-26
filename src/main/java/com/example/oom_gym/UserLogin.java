@@ -20,29 +20,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class UserLogin {
+public class UserLogin extends GridPane{
 
-    private static Label heading;
-    private static Button okBtn;
-    private static Button clearBtn;
-    private static Label usernameLabel;
-    private static Label passwordLabel;
     private static TextField usernameField;
     private static PasswordField passwordField;
-    private static ImageView img;
 
-    private static Database userData;
+    private static App app;
 
-    private static Stage stage2;
-    private static Scene scene2;
-
-    public static void createStage2(String username, String password){
-        stage2 = new Stage();
-        GridPane root2 = new GridPane();
-        scene2 = new Scene(root2,600,800);
-        scene2.getStylesheets().add("style.css");
-
-        Member user = userData.getRecord(username,password);
+    public void secondScreen(String username, String password){
+        getChildren().clear();
+        Member user = app.database.getRecord(username,password);
 
         Label USERNAMEL = new Label("USERNAME");
         Label USERNAMER = new Label(user.username);
@@ -65,11 +52,11 @@ public class UserLogin {
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(20);
-        root2.getColumnConstraints().add(column1);
-        root2.getRowConstraints().add(row1);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
         Label head = new Label("USER DETAILS");
-        root2.add(head,0,0);
-        root2.getColumnConstraints().remove(0);
+        add(head,0,0);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(head, HPos.CENTER);
 
         column1.setPercentWidth(50);
@@ -91,56 +78,44 @@ public class UserLogin {
         row7.setPercentHeight(25);
         row8.setPercentHeight(25);
         row9.setPercentHeight(25);
-        root2.getColumnConstraints().addAll(column1,column2);
-        root2.getRowConstraints().addAll(row2,row3,row4,row5,row6,row7,row8,row9);
+        getColumnConstraints().addAll(column1,column2);
+        getRowConstraints().addAll(row2,row3,row4,row5,row6,row7,row8,row9);
 
         Label[] labels = new Label[] {NAMEL,NAMER,USERNAMEL,USERNAMER,PASSWORDL,PASSWORDR,EMAILL,EMAILR,
-                                      GENDERL,GENDERR,AGEL,AGER,REGDATEL,REGDATER, DUEAMOUNTL,DUEAMOUNTR};
+                GENDERL,GENDERR,AGEL,AGER,REGDATEL,REGDATER, DUEAMOUNTL,DUEAMOUNTR};
 
         for(int i = 1; i <= 16; i+=2){
-            root2.add(labels[i-1],0,i/2 + 1);
-            root2.add(labels[i],1,i/2 + 1);
+            add(labels[i-1],0,i/2 + 1);
+            add(labels[i],1,i/2 + 1);
         }
 
 
-        root2.setPadding(new Insets(10,10,10,10));
-
-
-        stage2.setScene(scene2);
-        stage2.show();
+        setPadding(new Insets(10,10,10,10));
 
     }
-    public static void start(Stage primaryStage) {
 
-        userData = new Database();
+    public  UserLogin(App app) {
+        this.app = app;
 
-        userData.insertRecord("IIT2020028","vibhug507","Vibhu Garg",19,
-                "2021-11-23","Male","iit2020028@iiita.ac.in",10000);
 
-        GridPane root = new GridPane();
-        Scene scene = new Scene(root, 600, 800);
-        scene.getStylesheets().add("style.css");
-
-        root.setPadding(new Insets(10,10,10,10));
-
-        img = new ImageView();
+        ImageView img = new ImageView();
 
         Image img1 = new Image(UserLogin.class.getResourceAsStream("user.png"));
 
         img.setImage(img1);
 
-        heading = new Label("LOGIN");
-        okBtn = new Button("OK");
-        clearBtn = new Button("Clear");
-        usernameLabel = new Label("USERNAME");
-        passwordLabel = new Label("PASSWORD");
+        Label heading = new Label("LOGIN");
+        Button okBtn = new Button("OK");
+        Button clearBtn = new Button("Clear");
+        Label usernameLabel = new Label("USERNAME");
+        Label passwordLabel = new Label("PASSWORD");
         usernameField = new TextField();
         passwordField = new PasswordField();
 
         okBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                createStage2(usernameField.getText(),passwordField.getText());
+                secondScreen(usernameField.getText(),passwordField.getText());
             }
         });
 
@@ -157,10 +132,10 @@ public class UserLogin {
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(40);
-        root.getColumnConstraints().add(column1);
-        root.getRowConstraints().add(row1);
-        root.add(img,0,0,2,1);
-        root.getColumnConstraints().remove(0);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        add(img,0,0,2,1);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(img, HPos.CENTER);
 
 
@@ -172,16 +147,16 @@ public class UserLogin {
         column2.setPercentWidth(50);
         row2.setPercentHeight(25);
         row3.setPercentHeight(25);
-        root.getColumnConstraints().addAll(column1,column2);
-        root.getRowConstraints().addAll(row2,row3);
+        getColumnConstraints().addAll(column1,column2);
+        getRowConstraints().addAll(row2,row3);
 
 
-        root.add(usernameLabel,0,1);
-        root.add(usernameField,1,1);
-        root.add(passwordLabel,0,2);
-        root.add(passwordField,1,2);
-        root.add(okBtn,0,3);
-        root.add(clearBtn,1,3);
+        add(usernameLabel,0,1);
+        add(usernameField,1,1);
+        add(passwordLabel,0,2);
+        add(passwordField,1,2);
+        add(okBtn,0,3);
+        add(clearBtn,1,3);
 
 
         GridPane.setHalignment(usernameLabel, HPos.CENTER);
@@ -193,22 +168,14 @@ public class UserLogin {
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                String[] args;
-                HomeScreen.launch();
+                app.goBack();
             }
         });
 
-        RowConstraints row4 = new RowConstraints();
-        root.getRowConstraints().add(row4);
-        root.add(back,0,4);
+        add(back,0,3);
 
-        root.setHgap(10);
-        root.setVgap(10);
-
-        primaryStage.setTitle("User Login");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+        setHgap(10);
+        setVgap(10);
     }
 
 

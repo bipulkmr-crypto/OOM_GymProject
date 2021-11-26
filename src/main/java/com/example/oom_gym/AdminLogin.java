@@ -21,31 +21,20 @@ import javafx.scene.image.ImageView;
 
 // Admin Password is "OOM_C3"
 
-public class AdminLogin {
+public class AdminLogin extends GridPane {
 
-    private static Label heading;
-    private static Button okBtn;
-    private static Button clearBtn;
-    private static Label usernameLabel;
-    private static Label passwordLabel;
-    private static Label adminPasswordLabel;
+    private static App app;
     private static TextField usernameField;
     private static PasswordField passwordField;
     private static PasswordField adminPasswordField;
-    private static ImageView img;
 
-    private static Database userData;
 
-    private static Stage stage2;
-    private static Scene scene2;
 
-    public static void createStage2(String username, String password) {
-        stage2 = new Stage();
-        GridPane root2 = new GridPane();
-        scene2 = new Scene(root2, 600, 800);
-        scene2.getStylesheets().add("style.css");
+    public void createStage2(String username, String password) {
 
-        Member user = userData.getRecord(username, password);
+        getChildren().clear();
+
+        Member user = app.database.getRecord(username, password);
 
         Label USERNAMEL = new Label("USERNAME");
         TextField USERNAMER = new TextField(user.username);
@@ -68,8 +57,14 @@ public class AdminLogin {
         submitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                userData.insertRecord(USERNAMER.getText(),PASSWORDR.getText(),NAMER.getText(),Integer.parseInt(AGER.getText()),
-                        REGDATER.getText(),GENDERR.getText(),EMAILR.getText(),Integer.parseInt(DUEAMOUNTR.getText()));
+                app.database.insertRecord(USERNAMER.getText(),
+                        PASSWORDR.getText(),
+                        NAMER.getText(),
+                        Integer.parseInt(AGER.getText()),
+                        REGDATER.getText(),
+                        GENDERR.getText(),
+                        EMAILR.getText(),
+                        Integer.parseInt(DUEAMOUNTR.getText()));
             }
         });
 
@@ -77,11 +72,11 @@ public class AdminLogin {
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(20);
-        root2.getColumnConstraints().add(column1);
-        root2.getRowConstraints().add(row1);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
         Label head = new Label("USER DETAILS");
-        root2.add(head, 0, 0);
-        root2.getColumnConstraints().remove(0);
+        add(head, 0, 0);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(head, HPos.CENTER);
 
         column1.setPercentWidth(50);
@@ -105,8 +100,8 @@ public class AdminLogin {
         row8.setPercentHeight(9);
         row9.setPercentHeight(9);
         row10.setPercentHeight(9);
-        root2.getColumnConstraints().addAll(column1,column2);
-        root2.getRowConstraints().addAll(row2,row3,row4,row5,row6,row7,row8,row9,row10);
+        getColumnConstraints().addAll(column1,column2);
+        getRowConstraints().addAll(row2,row3,row4,row5,row6,row7,row8,row9,row10);
 
         // ADD ROW 10 JUST AFTER ROW 9
 
@@ -114,57 +109,48 @@ public class AdminLogin {
         TextField[] fields = new TextField[] {NAMER,USERNAMER,PASSWORDR,EMAILR,GENDERR,AGER,REGDATER,DUEAMOUNTR};
 
         for(int i = 1; i <= 8; i++){
-            root2.add(labels[i-1],0,i);
-            root2.add(fields[i-1],1,i);
+            add(labels[i-1],0,i);
+            add(fields[i-1],1,i);
         }
 
-        root2.add(submitBtn,0,9);
+        add(submitBtn,0,9);
 
         Button back=new Button("Back");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 String[] args;
-                HomeScreen.launch();
+                app.goBack();
             }
         });
-        root2.add(back,1,9);
+        add(back,1,9);
 
 
-        root2.setPadding(new Insets(10, 10, 10, 10));
-
-        stage2.setScene(scene2);
-        stage2.show();
+        setPadding(new Insets(10, 10, 10, 10));
 
     }
 
 
     //    @Override
-    public static void createAdminLogin(Stage primaryStage) {
+    public AdminLogin(App app) {
+        super();
+        this.app = app;
 
-        userData = new Database();
 
-        userData.insertRecord("IIT2020028", "vibhug507", "Vibhu Garg", 19,
-                "2021-11-23", "Male", "iit2020028@iiita.ac.in", 10000);
+        setPadding(new Insets(10, 10, 10, 10));
 
-        GridPane root = new GridPane();
-        Scene scene = new Scene(root, 600, 800);
-        scene.getStylesheets().add("style.css");
-
-        root.setPadding(new Insets(10, 10, 10, 10));
-
-        img = new ImageView();
+        ImageView img = new ImageView();
 
         Image img1 = new Image(AdminLogin.class.getResourceAsStream("user.png"));
 
         img.setImage(img1);
 
-        heading = new Label("LOGIN");
-        okBtn = new Button("OK");
-        clearBtn = new Button("Clear");
-        usernameLabel = new Label("USERNAME");
-        passwordLabel = new Label("PASSWORD");
-        adminPasswordLabel = new Label("ADMIN PASSWORD");
+        Label heading = new Label("LOGIN");
+        Button okBtn = new Button("OK");
+        Button clearBtn = new Button("Clear");
+        Label usernameLabel = new Label("USERNAME");
+        Label passwordLabel = new Label("PASSWORD");
+        Label adminPasswordLabel = new Label("ADMIN PASSWORD");
         usernameField = new TextField();
         passwordField = new PasswordField();
         adminPasswordField = new PasswordField();
@@ -191,10 +177,10 @@ public class AdminLogin {
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(40);
-        root.getColumnConstraints().add(column1);
-        root.getRowConstraints().add(row1);
-        root.add(img, 0, 0, 2, 1);
-        root.getColumnConstraints().remove(0);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        add(img, 0, 0, 2, 1);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(img, HPos.CENTER);
 
 
@@ -209,18 +195,18 @@ public class AdminLogin {
         row3.setPercentHeight(15);
         row4.setPercentHeight(15);
         row5.setPercentHeight(15);
-        root.getColumnConstraints().addAll(column1, column2);
-        root.getRowConstraints().addAll(row2, row3, row4, row5);
+        getColumnConstraints().addAll(column1, column2);
+        getRowConstraints().addAll(row2, row3, row4, row5);
 
 
-        root.add(usernameLabel, 0, 1);
-        root.add(usernameField, 1, 1);
-        root.add(passwordLabel, 0, 2);
-        root.add(passwordField, 1, 2);
-        root.add(adminPasswordLabel, 0, 3);
-        root.add(adminPasswordField, 1, 3);
-        root.add(okBtn, 0, 4);
-        root.add(clearBtn, 1, 4);
+        add(usernameLabel, 0, 1);
+        add(usernameField, 1, 1);
+        add(passwordLabel, 0, 2);
+        add(passwordField, 1, 2);
+        add(adminPasswordLabel, 0, 3);
+        add(adminPasswordField, 1, 3);
+        add(okBtn, 1, 4);
+        add(clearBtn, 1, 4);
 
         GridPane.setHalignment(usernameLabel, HPos.CENTER);
         GridPane.setHalignment(passwordLabel, HPos.CENTER);
@@ -228,12 +214,17 @@ public class AdminLogin {
         GridPane.setHalignment(okBtn, HPos.RIGHT);
         GridPane.setHalignment(clearBtn, HPos.LEFT);
 
-        root.setHgap(10);
-        root.setVgap(10);
+        Button back=new Button("Back");
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                app.goBack();
+            }
+        });
+        add(back,0,4);
 
-        primaryStage.setTitle("Login Page");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        setHgap(10);
+        setVgap(10);
 
     }
 

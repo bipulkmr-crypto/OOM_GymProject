@@ -13,18 +13,9 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
-public class RegistrationPage {
+public class RegistrationPage extends GridPane{
 
-    private static Label heading;
-    private static Label nameLabel;
-    private static Label usernameLabel;
-    private static Label passwordLabel;
-    private static Label ageLabel;
-    private static Label regDateLabel;
-    private static Label emailLabel;
-    private static Label dueAmountLabel;
-    private static Label genderLabel;
-
+    private static App app;
     private static TextField nameField;
     private static TextField usernameField;
     private static PasswordField passwordField;
@@ -34,28 +25,22 @@ public class RegistrationPage {
     private static TextField dueAmountField;
     private static TextField genderField;
 
-    private static Button submitBtn;
+    public  RegistrationPage (App app) {
+        super();
+        this.app = app;
 
+        Label heading = new Label("NEW REGISTRATION");
 
-    private static Database userData;
+        Button submitBtn = new Button("SUBMIT");
 
-
-    public static void RegistrationPageCreator(Stage primaryStage) {
-
-        userData = new Database();
-
-        heading = new Label("NEW REGISTRATION");
-
-        submitBtn = new Button("SUBMIT");
-
-        nameLabel = new Label("NAME");
-        usernameLabel = new Label("USERNAME");
-        passwordLabel = new Label("PASSWORD");
-        ageLabel = new Label("AGE");
-        regDateLabel = new Label("REG. DATE");
-        emailLabel = new Label("EMAIL");
-        dueAmountLabel = new Label("DUE AMOUNT");
-        genderLabel = new Label("GENDER");
+        Label nameLabel = new Label("NAME");
+        Label usernameLabel = new Label("USERNAME");
+        Label passwordLabel = new Label("PASSWORD");
+        Label ageLabel = new Label("AGE");
+        Label regDateLabel = new Label("REG. DATE");
+        Label emailLabel = new Label("EMAIL");
+        Label dueAmountLabel = new Label("DUE AMOUNT");
+        Label genderLabel = new Label("GENDER");
 
         nameField = new TextField();
         usernameField = new TextField();
@@ -67,19 +52,14 @@ public class RegistrationPage {
         genderField = new TextField();
 
 
-        GridPane root = new GridPane();
-        Scene scene = new Scene(root, 600, 800);
-        scene.getStylesheets().add("style.css");
-        root.setPadding(new Insets(10, 10, 10, 10));
-
         ColumnConstraints column1 = new ColumnConstraints();
         RowConstraints row1 = new RowConstraints();
         column1.setPercentWidth(100);
         row1.setPercentHeight(20);
-        root.getColumnConstraints().add(column1);
-        root.getRowConstraints().add(row1);
-        root.add(heading, 0, 0);
-        root.getColumnConstraints().remove(0);
+        getColumnConstraints().add(column1);
+        getRowConstraints().add(row1);
+        add(heading, 0, 0);
+        getColumnConstraints().remove(0);
         GridPane.setHalignment(heading, HPos.CENTER);
 
         column1.setPercentWidth(50);
@@ -103,43 +83,39 @@ public class RegistrationPage {
         row8.setPercentHeight(9);
         row9.setPercentHeight(9);
         row10.setPercentHeight(8);
-        root.getColumnConstraints().addAll(column1, column2);
-        root.getRowConstraints().addAll(row2, row3, row4, row5, row6, row7, row8, row9);
+        getColumnConstraints().addAll(column1, column2);
+        getRowConstraints().addAll(row2, row3, row4, row5, row6, row7, row8, row9);
 
         Label[] labels = new Label[]{nameLabel, usernameLabel, passwordLabel, ageLabel, regDateLabel, emailLabel, dueAmountLabel, genderLabel};
         TextField[] fields = new TextField[]{nameField, usernameField, usernameField, ageField, regDateField, emailField, dueAmountField, genderField};
 
         for (int i = 1; i <= 8; i++) {
-            root.add(labels[i - 1], 0, i);
-            if (i == 3) root.add(passwordField, 1, i);
-            else root.add(fields[i - 1], 1, i);
+           add(labels[i - 1], 0, i);
+            if (i == 3) add(passwordField, 1, i);
+            else add(fields[i - 1], 1, i);
         }
 
         submitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                userData.insertRecord(usernameField.getText(), passwordField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
+                app.database.insertRecord(usernameField.getText(), passwordField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
                         regDateField.getText(), genderField.getText(), emailField.getText(), Integer.parseInt(dueAmountField.getText()));
                 for(int i = 0; i < 8; i ++) fields[i].clear();
                 passwordField.clear();
             }
         });
 
-        root.add(submitBtn, 0, 9);
+        add(submitBtn, 0, 9);
         Button back=new Button("Back");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                String[] args;
-                HomeScreen.launch();
+                app.goBack();
             }
         });
-        root.add(back,1,9);
+        add(back,1,9);
         GridPane.setHalignment(submitBtn, HPos.CENTER);
 
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Registration Page");
-        primaryStage.show();
 
     }
 }
